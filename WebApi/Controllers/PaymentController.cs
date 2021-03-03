@@ -37,16 +37,15 @@ namespace WebApi.Controllers
                     return BadRequest(results.Errors);
                 }
                 string response = await _paymentRepo.ProcessPayment(paymentRequest);
-                
-                if(response == "Success")
+
+                if (response == "Success")
                 {
                     return Ok();
                 }
-                if(response == "Failed")
+                else
                 {
-                    return StatusCode(StatusCodes.Status500InternalServerError,"An error Occur while processing your request");
+                   return StatusCode(StatusCodes.Status500InternalServerError, "An error Occur while processing your request");
                 }
-                return Ok(true);
             }
             catch (Exception)
             {
